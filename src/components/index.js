@@ -11,3 +11,4 @@ export { default as Avatar } from './avatar';
 export { default as Background } from './background';
 export { default as BottomActionSheet } from './bottomActionSheet';
 export { default as RatingView } from './ratingView';
+export { default as Heading } from './heading';
