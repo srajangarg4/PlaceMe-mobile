@@ -1,4 +1,9 @@
 const messages = {
+  onBoarding: {
+    welcomeGreeting: 'Hello, Welcome to PlaceMe',
+    getstarted: 'Get started',
+    alreadyRegistered: 'Already registered',
+  },
   signin: {
     forgotPassoword: 'Forgot Password?',
     signup: 'Sign up',
@@ -37,7 +42,7 @@ const messages = {
     postcode: 'Postcode',
     phoneDescription:
       'Add country code to phone number (i.e 1 for North America, 353 for Ireland, 31 for Netherlands etc)',
-    firstNameError: 'Enter first name',
+    firstNameError: 'Enter your name',
     lastNameError: 'Enter last name',
     postcodeDescription: 'Enter a postcode',
     mailError: 'Enter a email address',
@@ -47,7 +52,7 @@ const messages = {
     passwordDescription: 'Password should be minimum of 8 characters, must include 1 uppercase letter, 1 number and 1 special character.',
   },
   home: {
-    listHeading: 'Sports for you',
+
   },
   otp: {
     codeNotRecived: "Didn't get the code?",
@@ -83,8 +88,7 @@ const messages = {
     state: 'Choose a state',
     city: 'Enter a city',
     DOB: 'Enter your date of birth',
-    lastName: 'Enter your last name',
-    firstName: 'Enter your first name',
+    name: 'Enter your name',
     sport: 'Please choose a sport',
     dateOfBooking: 'Please specify day of booking',
     timeSlot: 'Please choose a time slot',
@@ -106,42 +110,7 @@ const messages = {
     haveAccount: 'I already have an account',
     buttonLabel: 'Get Started',
   },
-  sportSelection: {
-    maxSportsWarning: 'You have already selected 5 sports',
-    heading: 'Please select maximum five sports',
-  },
-  bookingDetail: {
-    dueButtonLabel: 'Pay due amount',
-    receiptButtonLabel: 'Download your receipt',
-    cancelButtonLabel: 'Cancel Booking',
-  },
-  bookingDetails: {
-    selectBookingType: 'Select booking type',
-    selectSports: 'Select Sports',
-    numberOfPeople: ' No of people',
-    groundOptions: 'Select ground option',
-    timeSlot: 'Time slots',
-  },
-  academyDetail: {
-    timing: 'Timing',
-    package: 'Packages',
-    description: 'Description',
-    facilities: 'Facilities',
-    address: 'Address',
-  },
-  confirmation: {
-    splitPayWithFriends: 'Split Pay with Friends',
-    sharingMessage: 'You can share the link to pay with your friends after you have paid your share!',
-  },
-  splitPayment: {
-    message: 'Congratulation! Your booking has been confirmed. We have recived your part of total payment. Copy the link given below and share it with your friends for them to complete their payment.',
-  },
-  paymentSuccess: {
-    congratulationMessage: 'Congratulations! We have recived your payment and confirmed your booking.',
-    successMessage: 'Payment Successful !',
-    receiptDownload: 'Download Your recipt',
-    done: 'Done',
-  },
+
   note: 'Note: ',
   passwordDescription: 'Password should be minimum of 8 characters, must include 1 uppercase letter, 1 number and 1 special character.',
 };

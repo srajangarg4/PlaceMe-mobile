@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
     flexGrow: 1,
+    paddingBottom: 10,
   },
   keyboardAvoidingView: {
     flex: 1,

@@ -19,7 +19,7 @@ export const color = {
     bgColorLight: '#fdf6ee',
   },
   lightBule: '#BDD2FF',
-  background: '#ffffff',
+  background: '#FFF',
   skyblue: '#BDD2FF',
   green: '#23AD30',
 };
