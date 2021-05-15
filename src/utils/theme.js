@@ -1,6 +1,6 @@
 export const color = {
   primary: '#181B80',
-  secondary: '#A40E4C',
+  secondary: '#E55812',
   white: '#ffffff',
   textGray: '#7E8BA6',
   darkGray: '#45545f',

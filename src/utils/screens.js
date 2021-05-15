@@ -22,7 +22,7 @@ const Screens = {
     path: 'onBoarding',
   },
   home: {
-    path: 'home',
+    path: 'Home',
   },
   mobileSignup: {
     path: 'mobileSignup',
@@ -41,7 +41,7 @@ const Screens = {
     header: 'Change Password',
   },
   profile: {
-    path: 'profile',
+    path: 'Profile',
   },
   bottomTabNavigation: {
     path: 'bottomTabNavigation',
@@ -62,7 +62,7 @@ const Screens = {
     path: 'pendingRequests',
   },
   jobApplication: {
-    path: 'jobApplication',
+    path: 'Job Application',
   },
   jobApplyForm: {
     path: 'jobApplyForm',

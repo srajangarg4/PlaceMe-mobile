@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   color, fonts, PropTypes, screens,
 } from '../../utils';
-import { Icon } from '../../components';
 import NavigationService from '../../NavigationService';
 import {
   AcademicDetails, AccountDetails, ChangePassword, PersonalDetails, Profile, UpdateRequests,
@@ -32,12 +32,14 @@ export const AppStack = () => (
         color: color.primary,
         fontFamily: fonts.semiBold,
       },
-      headerLeft: () => (
+      headerLeft: (props) => (
         <Icon
-          name="backArrow"
-          size={30}
-          containerStyle={{ marginHorizontal: 15 }}
+          name="arrow-left"
+          size={20}
+          style={{ marginHorizontal: 15 }}
+          color={color.secondary}
           onPress={() => NavigationService.goBack()}
+          {...props}
         />
       ),
     }}
@@ -89,8 +91,10 @@ export const AppStack = () => (
   </Stack.Navigator>
 );
 
-const CustomTabBarIcon = ({ focused, size, label }) => (
-  <Icon size={size} name={focused ? `orange${label}` : `blue${label}`} />
+const CustomTabBarIcon = ({
+  focused, size, iconName,
+}) => (
+  <Icon size={size} name={iconName} color={focused ? color.secondary : color.primary} />
 );
 
 export const AppBottomNavigation = () => (
@@ -113,21 +117,21 @@ export const AppBottomNavigation = () => (
       component={Dashboard}
       name={screens.home.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Home" {...props} />,
+        tabBarIcon: (props) => <CustomTabBarIcon label="Home" {...props} iconName="home" />,
       }}
     />
     <Tab.Screen
       component={JobApplications}
       name={screens.jobApplication.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Booking" {...props} />,
+        tabBarIcon: (props) => <CustomTabBarIcon label="Booking" {...props} iconName="graduation-cap" />,
       }}
     />
     <Tab.Screen
       component={Profile}
       name={screens.profile.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Profile" {...props} />,
+        tabBarIcon: (props) => <CustomTabBarIcon label="Profile" {...props} iconName="user" />,
       }}
     />
   </Tab.Navigator>
@@ -136,10 +140,9 @@ export const AppBottomNavigation = () => (
 CustomTabBarIcon.defaultProps = {
   focused: false,
   size: undefined,
-  label: undefined,
 };
 CustomTabBarIcon.propTypes = {
   focused: PropTypes.bool,
   size: PropTypes.number,
-  label: PropTypes.string,
+  iconName: PropTypes.string.isRequired,
 };

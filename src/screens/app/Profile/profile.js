@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Container, Icon, Text } from '../../../components';
+import { Avatar, Container, Text } from '../../../components';
 import {
   color, navigationType, PropTypes, screens, viewStyleType,
 } from '../../../utils';
@@ -13,7 +14,7 @@ const Profile = ({ photoUri, navigation }) => {
   console.log(navigation);
   const dispatch = useDispatch();
   return (
-    <Container>
+    <Container style={styles.container}>
       <View>
         <ProfileDetails
           name="Tobugo"
@@ -24,12 +25,12 @@ const Profile = ({ photoUri, navigation }) => {
         />
         <Option
           name="Academic Details"
-          icon="addressBook"
+          icon="university"
           onPress={() => navigation.navigate(screens.academicDetails.path)}
         />
         <Option
           name="Personal Details"
-          icon="sportsPreference"
+          icon="user-shield"
           onPress={() => NavigationService.navigate(screens.personalDetails.path)}
         />
         <Option
@@ -39,7 +40,7 @@ const Profile = ({ photoUri, navigation }) => {
         />
         <Option
           name="Logout"
-          icon="logout"
+          icon="sign-out-alt"
           onPress={() => {
             dispatch(logout());
           }}
@@ -48,6 +49,8 @@ const Profile = ({ photoUri, navigation }) => {
     </Container>
   );
 };
+
+const uri = 'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
 
 const ProfileDetails = ({
   containerStyle,
@@ -58,13 +61,14 @@ const ProfileDetails = ({
 }) => (
   <View>
     <View style={[styles.profileContainer, containerStyle]}>
+      <Avatar imgSrc={{ uri }} size={80} />
       <View style={{ marginLeft: 15, justifyContent: 'space-between' }}>
         <Text fontSize={22} fontType="semiBold" color={color.primary}>{name}</Text>
         <Text type="hs" color={color.primary}>{email}</Text>
         <Text type="hs" color={color.primary}>{phoneNumber}</Text>
       </View>
       <View style={styles.avatarContainer}>
-        <Icon name="edit" size={25} rounded onPress={onPress} />
+        <Icon name="pencil-alt" size={15} color={color.secondary} onPress={onPress} />
       </View>
     </View>
   </View>
@@ -91,7 +95,9 @@ const Option = ({ name, icon, onPress }) => (
       <Icon name={icon} style={{ marginRight: 10 }} size={22} />
       <Text fontType="semiBold" color={color.primary}>{name}</Text>
     </View>
-    <Icon name="downArrow" style={styles.moreIcon} />
+    <View>
+      <Icon name="chevron-right" style={styles.moreIcon} />
+    </View>
   </TouchableOpacity>
 );
 
@@ -144,7 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   moreIcon: {
-    transform: [{ rotate: '-90deg' }],
     alignSelf: 'flex-end',
   },
   avatarContainer: {
@@ -153,6 +158,12 @@ const styles = StyleSheet.create({
     top: 12,
     borderRadius: 15,
     borderWidth: 1,
+    padding: 5,
+    alignContent: 'center',
+    justifyContent: 'center',
     borderColor: color.secondary,
+  },
+  container: {
+    paddingTop: 20,
   },
 });
