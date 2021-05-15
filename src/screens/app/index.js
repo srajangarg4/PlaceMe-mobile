@@ -1,11 +1,22 @@
 import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { color, screens } from '../../utils';
-import Dashboard from './dashboard';
+import {
+  color, fonts, PropTypes, screens,
+} from '../../utils';
+import { Icon } from '../../components';
+import NavigationService from '../../NavigationService';
+import {
+  AcademicDetails, AccountDetails, ChangePassword, PersonalDetails, Profile, UpdateRequests,
+} from './Profile';
+import { Dashboard } from './dashboard';
+import { JobConfirmation, JobDetails } from './Job';
+import JobApplications from './JobApplications/jobApplications';
 
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const AppStack = () => (
+export const AppStack = () => (
   <Stack.Navigator
     screenOptions={{
       headerTitle: null,
@@ -13,17 +24,122 @@ const AppStack = () => (
         backgroundColor: color.background,
         elevation: 0,
       },
-      headerTintColor: color.primary,
       cardStyle: {
         backgroundColor: color.background,
       },
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        color: color.primary,
+        fontFamily: fonts.semiBold,
+      },
+      headerLeft: () => (
+        <Icon
+          name="backArrow"
+          size={30}
+          containerStyle={{ marginHorizontal: 15 }}
+          onPress={() => NavigationService.goBack()}
+        />
+      ),
     }}
   >
     <Stack.Screen
-      name={screens.dashboard.path}
-      component={Dashboard}
+      name={screens.bottomTabNavigation.path}
+      options={{ headerShown: false }}
+      component={AppBottomNavigation}
+    />
+    {/** ------------------------------------------------------------ */}
+    <Stack.Screen
+      name={screens.personalDetails.path}
+      component={PersonalDetails}
+    />
+    <Stack.Screen
+      name={screens.academicDetails.path}
+      component={AcademicDetails}
+    />
+    <Stack.Screen
+      name={screens.accountDetails.path}
+      component={AccountDetails}
+    />
+    <Stack.Screen
+      name={screens.changePassword.path}
+      component={ChangePassword}
+    />
+    <Stack.Screen
+      name={screens.profile.path}
+      component={Profile}
+    />
+    <Stack.Screen
+      name={screens.pendingRequests.path}
+      component={UpdateRequests}
+    />
+    {/** ------------------------------------------------------------ */}
+    <Stack.Screen
+      name={screens.jobDetail.path}
+      component={JobDetails}
+    />
+    <Stack.Screen
+      name={screens.jobApplyForm.path}
+      component={JobConfirmation}
+    />
+    {/** ------------------------------------------------------------ */}
+    <Stack.Screen
+      name={screens.jobApplication.path}
+      component={JobApplications}
     />
   </Stack.Navigator>
 );
 
-export default AppStack;
+const CustomTabBarIcon = ({ focused, size, label }) => (
+  <Icon size={size} name={focused ? `orange${label}` : `blue${label}`} />
+);
+
+export const AppBottomNavigation = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeTintColor: color.secondary,
+      inactiveTintColor: color.primary,
+      showIcon: true,
+      keyboardHidesTabBar: true,
+      style: { height: 65, padding: 0 },
+      tabStyle: {
+        padding: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+    }}
+    sceneContainerStyle={{ backgroundColor: color.background }}
+  >
+    <Tab.Screen
+      component={Dashboard}
+      name={screens.home.path}
+      options={{
+        tabBarIcon: (props) => <CustomTabBarIcon label="Home" {...props} />,
+      }}
+    />
+    <Tab.Screen
+      component={JobApplications}
+      name={screens.jobApplication.path}
+      options={{
+        tabBarIcon: (props) => <CustomTabBarIcon label="Booking" {...props} />,
+      }}
+    />
+    <Tab.Screen
+      component={Profile}
+      name={screens.profile.path}
+      options={{
+        tabBarIcon: (props) => <CustomTabBarIcon label="Profile" {...props} />,
+      }}
+    />
+  </Tab.Navigator>
+);
+
+CustomTabBarIcon.defaultProps = {
+  focused: false,
+  size: undefined,
+  label: undefined,
+};
+CustomTabBarIcon.propTypes = {
+  focused: PropTypes.bool,
+  size: PropTypes.number,
+  label: PropTypes.string,
+};
