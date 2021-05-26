@@ -3,7 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { color, screens } from '../../utils';
 import Signin from './signin';
 import Signup from './signup';
-import OnBoarding from './onBoarding';
+import Onboarding from './onboarding';
+import ForgotPassword from './forgotPassword';
+import otpSignup from './otpSignup';
+import OTP from './otp';
 
 const Stack = createStackNavigator();
 
@@ -24,7 +27,7 @@ const AuthStack = () => (
     <Stack.Screen
       options={{ headerShown: false }}
       name={screens.onBoarding.path}
-      component={OnBoarding}
+      component={Onboarding}
     />
     <Stack.Screen
       name={screens.signin.path}
@@ -34,6 +37,19 @@ const AuthStack = () => (
       name={screens.signup.path}
       component={Signup}
     />
+    <Stack.Screen
+      name={screens.forgotPassword.path}
+      component={ForgotPassword}
+    />
+    <Stack.Screen
+      name={screens.mobileSignup.path}
+      component={otpSignup}
+    />
+    <Stack.Screen
+      name={screens.otp.path}
+      component={OTP}
+    />
+
   </Stack.Navigator>
 );
 

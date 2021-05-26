@@ -1,9 +1,8 @@
+/* eslint-disable indent */
 import React from 'react';
 import { Text as ReactText, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import {
-  color as colors, fonts, fontSizes, childrenType,
-} from '../utils';
+import { color as colors, fonts, fontSizes, childrenType } from '../utils';
 
 function getFontSize(fontSize, type) {
   switch (type) {
@@ -16,7 +15,7 @@ function getFontSize(fontSize, type) {
     case 'h4':
       return 18;
     case 'h5':
-      return 16;
+      return 15;
     case 'hs':
       return 13;
     default:
@@ -75,9 +74,9 @@ const Text = ({
             },
             centerAlign
               ? {
-                textAlign: 'center',
-                alignSelf: 'center',
-              }
+                  textAlign: 'center',
+                  alignSelf: 'center',
+                }
               : {},
             underline && { textDecorationLine: 'underline' },
             style,
@@ -104,9 +103,9 @@ const Text = ({
         },
         centerAlign
           ? {
-            textAlign: 'center',
-            alignSelf: 'center',
-          }
+              textAlign: 'center',
+              alignSelf: 'center',
+            }
           : {},
         underline && { textDecorationLine: 'underline' },
         style,

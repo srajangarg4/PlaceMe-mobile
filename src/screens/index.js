@@ -7,7 +7,7 @@ import NavigationService from '../NavigationService';
 import AuthStack from './auth';
 import { AUTH_STATE, getData } from '../AsyncStorage';
 import Middleware from './middleware';
-import AppStack from './app';
+import { AppStack } from './app';
 
 const Stack = createStackNavigator();
 

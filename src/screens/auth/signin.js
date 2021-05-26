@@ -5,17 +5,21 @@ import {
 import { useDispatch } from 'react-redux';
 import { updateAuth } from '../../actions';
 import {
-  Button, Container, Heading, Input,
+  Button, Container, Heading, Input, Text,
 } from '../../components';
 import { useFormReducer } from '../../hooks';
+import NavigationService from '../../NavigationService';
 import {
-  messages, required, validateEmail, validatePassword,
+  color,
+  messages, required, screens, validateEmail, validatePassword,
 } from '../../utils';
 
 const validators = {
   email: [required(messages.required.email), validateEmail],
   password: [required(messages.required.password), validatePassword],
 };
+
+const navigateToSignup = () => NavigationService.navigate(screens.signup.path);
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -41,7 +45,25 @@ const Signin = () => {
           secureTextEntry: true,
           blurOnSubmit: true,
         })(Input)}
+        <Text
+          onPress={() => NavigationService.navigate(screens.forgotPassword.path)}
+          style={styles.leftAlignedText}
+          fontType="semiBold"
+        >
+          {messages.signin.forgotPassoword}
+        </Text>
       </View>
+      <Text
+        centerAlign
+        color={color.primary}
+        onPress={() => {
+          NavigationService.navigate(screens.mobileSignup.path);
+        }}
+        fontType="semiBold"
+        style={styles.text}
+      >
+        {messages.signin.mobileSignup}
+      </Text>
       <Button
         fullWidth
         text="Submit"
@@ -49,7 +71,16 @@ const Signin = () => {
           dispatch(updateAuth({ token: '123' }));
         })}
         loading={submitting}
+        style={styles.button}
       />
+      <View style={styles.row}>
+        <Text centerAlign onPress={navigateToSignup} fontType="semiBold">
+          {messages.signin.noAccount}
+        </Text>
+        <Text color={color.primary} onPress={navigateToSignup} fontType="semiBold">
+          {messages.signin.signup}
+        </Text>
+      </View>
     </Container>
   );
 };
@@ -60,6 +91,20 @@ const styles = StyleSheet.create({
   },
   fieldContainer: {
     marginBottom: 25,
+  },
+  leftAlignedText: {
+    textAlign: 'right',
+    fontSize: 14,
+  },
+  button: {
+    marginVertical: 25,
+  },
+  text: {
+    marginBottom: 0,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
 

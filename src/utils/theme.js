@@ -1,5 +1,5 @@
 export const color = {
-  primary: '#0D2860',
+  primary: '#181B80',
   secondary: '#F27935',
   white: '#ffffff',
   textGray: '#7E8BA6',
@@ -19,7 +19,7 @@ export const color = {
     bgColorLight: '#fdf6ee',
   },
   lightBule: '#BDD2FF',
-  background: '#FFF',
+  background: '#ffffff',
   skyblue: '#BDD2FF',
   green: '#23AD30',
 };

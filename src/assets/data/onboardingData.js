@@ -2,7 +2,7 @@ import { slide1, slide2, slide3 } from '../../utils';
 
 export default [
   {
-    label: 'Pay & Play',
+    label: 'Stepping into the future',
     src: slide1,
   },
   {

@@ -1,11 +1,28 @@
 import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { color, screens } from '../../utils';
-import Dashboard from './dashboard';
+import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import ADIcon from 'react-native-vector-icons/AntDesign';
+import MIcon from 'react-native-vector-icons/MaterialIcons';
+import { color, fonts, screens } from '../../utils';
+import NavigationService from '../../NavigationService';
+import {
+  AcademicDetails,
+  AccountDetails,
+  ChangePassword,
+  EditProfile,
+  PersonalDetails,
+  Profile,
+  UpdateRequests,
+} from './Profile';
+import Home from './Home';
+import { JobConfirmation, JobDetails } from './Job';
+import { Applications } from './JobApplications';
 
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const AppStack = () => (
+export const AppStack = () => (
   <Stack.Navigator
     screenOptions={{
       headerTitle: null,
@@ -13,17 +30,113 @@ const AppStack = () => (
         backgroundColor: color.background,
         elevation: 0,
       },
-      headerTintColor: color.primary,
       cardStyle: {
         backgroundColor: color.background,
       },
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        color: color.primary,
+        fontFamily: fonts.semiBold,
+      },
+      headerLeft: (props) => (
+        <FAIcon
+          name="arrow-left"
+          size={20}
+          style={{ marginHorizontal: 15 }}
+          color={color.secondary}
+          onPress={() => NavigationService.goBack()}
+          {...props}
+        />
+      ),
     }}
   >
     <Stack.Screen
-      name={screens.dashboard.path}
-      component={Dashboard}
+      name={screens.bottomTabNavigation.path}
+      options={{ headerShown: false }}
+      component={AppBottomNavigation}
     />
+    {/** ------------------------------------------------------------ */}
+    <Stack.Screen
+      name={screens.personalDetails.path}
+      component={PersonalDetails}
+    />
+    <Stack.Screen
+      name={screens.academicDetails.path}
+      component={AcademicDetails}
+    />
+    <Stack.Screen name={screens.accountDetails.path} component={EditProfile} />
+    <Stack.Screen
+      name={screens.changePassword.path}
+      component={ChangePassword}
+    />
+    <Stack.Screen
+      name={screens.pendingRequests.path}
+      component={UpdateRequests}
+    />
+    {/** ------------------------------------------------------------ */}
+    <Stack.Screen
+      name={screens.jobDetail.path}
+      component={JobDetails}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Stack.Screen
+      name={screens.jobApplyForm.path}
+      component={JobConfirmation}
+    />
+    {/** ------------------------------------------------------------ */}
   </Stack.Navigator>
 );
 
-export default AppStack;
+// const CustomTabBarIcon = ({ focused, size, iconName }) => (
+//   <Icon
+//     size={size}
+//     name={iconName}
+//     color={focused ? color.secondary : color.primary}
+//   />
+// );
+
+export const AppBottomNavigation = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeTintColor: color.secondary,
+      inactiveTintColor: color.primary,
+      showIcon: true,
+      keyboardHidesTabBar: true,
+      style: { height: 65, padding: 0 },
+      tabStyle: {
+        padding: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+    }}
+    sceneContainerStyle={{ backgroundColor: color.background }}
+  >
+    <Tab.Screen
+      component={Home}
+      name={screens.home.path}
+      options={{
+        tabBarIcon: (props) => <ADIcon {...props} name="home" />,
+      }}
+    />
+    <Tab.Screen
+      component={Applications}
+      name={screens.jobApplication.path}
+      options={{
+        tabBarIcon: (props) => (
+          <MIcon label="Booking" {...props} name="work-outline" />
+        ),
+      }}
+    />
+    <Tab.Screen
+      component={Profile}
+      name={screens.profile.path}
+      options={{
+        tabBarIcon: (props) => (
+          <FAIcon label="Profile" {...props} name="user" />
+        ),
+      }}
+    />
+  </Tab.Navigator>
+);
