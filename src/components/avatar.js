@@ -1,9 +1,13 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
-  color, imageStyleType, PropTypes, requireType, viewStyleType,
+  color,
+  imageStyleType,
+  PropTypes,
+  requireType,
+  viewStyleType,
 } from '../utils';
-import Icon from './icon';
 
 const Avatar = ({
   imgSrc,
@@ -12,7 +16,6 @@ const Avatar = ({
   containerStyle,
   imageStyle,
   showEdit,
-  onEditPress,
 }) => (
   <View style={[styles.container, containerStyle]}>
     <Image
@@ -26,13 +29,7 @@ const Avatar = ({
     />
     {showEdit ? (
       <View style={styles.editIcon}>
-        <Icon
-          name="edit"
-          rounded
-          size={30}
-          containerStyle={{ borderColor: color.secondary, borderWidth: 1 }}
-          onPress={onEditPress}
-        />
+        <Icon name="pencil-alt" size={15} color={color.secondary} />
       </View>
     ) : null}
   </View>
@@ -44,7 +41,6 @@ Avatar.defaultProps = {
   containerStyle: undefined,
   imageStyle: undefined,
   showEdit: false,
-  onEditPress: undefined,
 };
 Avatar.propTypes = {
   imgSrc: requireType.isRequired,
@@ -53,7 +49,6 @@ Avatar.propTypes = {
   containerStyle: viewStyleType,
   imageStyle: imageStyleType,
   showEdit: PropTypes.bool,
-  onEditPress: PropTypes.func,
 };
 
 export default Avatar;
@@ -71,5 +66,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 5,
+    borderColor: 'red',
+    borderWidth: 1,
+    padding: 5,
+    backgroundColor: 'white',
+    borderRadius: 15,
   },
 });

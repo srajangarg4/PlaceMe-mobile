@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { connect, useSelector } from 'react-redux';
 import { launchImageLibrary } from 'react-native-image-picker';
-import {
-  Avatar, Button, Container, Input,
-} from '../../../components';
+import { Avatar, Button, Container, Input } from '../../../components';
 import {
   containerWidth,
-  messages, PropTypes, required, showToast, validateEmail, validatePhoneNumber,
+  messages,
+  required,
+  showToast,
+  validateEmail,
+  validatePhoneNumber,
 } from '../../../utils';
 import { useFormReducer } from '../../../hooks';
 import NavigationService from '../../../NavigationService';
@@ -18,38 +19,35 @@ const validators = {
   phone: [required(messages.validation.enterPhoneNumber), validatePhoneNumber],
 };
 
-const EditProfile = ({ photoUri, updateImage }) => {
-  const {
-    connectField, submitting, handleSubmit, change,
-  } = useFormReducer(validators);
+const uri =
+  'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
+
+const EditProfile = () => {
+  const { connectField, submitting, handleSubmit } = useFormReducer(validators);
   const nameRef = useRef(null);
   const dobRef = useRef(null);
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
-  const user = useSelector((state) => state.user);
-  useEffect(() => {
-    Object.keys(validators).forEach((key) => {
-      change(key, user[key]);
-    });
-  }, [change, user]);
+  useEffect(() => {}, []);
   return (
     <Container keyboardAware>
       <Avatar
-        imgSrc={{ uri: photoUri }}
+        imgSrc={{ uri }}
         size={100}
         containerStyle={styles.avatar}
         showEdit
         onEditPress={() => {
-          launchImageLibrary({
-            mediaType: 'photo',
-            includeBase64: false,
-            maxHeight: 200,
-            maxWidth: 200,
-          },
-          (response) => {
-            const { uri } = response;
-            updateImage({ photo: uri });
-          });
+          launchImageLibrary(
+            {
+              mediaType: 'photo',
+              includeBase64: false,
+              maxHeight: 200,
+              maxWidth: 200,
+            },
+            (response) => {
+              console.log('Response of image', response);
+            },
+          );
         }}
       />
       <View style={styles.fieldContainer}>
@@ -92,21 +90,11 @@ const EditProfile = ({ photoUri, updateImage }) => {
   );
 };
 
-EditProfile.defaultProps = {
-  photoUri: undefined,
-};
+EditProfile.defaultProps = {};
 
-EditProfile.propTypes = {
-  photoUri: PropTypes.string,
-  updateImage: PropTypes.func.isRequired,
-};
+EditProfile.propTypes = {};
 
-const mapStateToProps = (state) => ({
-  photoUri: state.user?.photo,
-});
-
-export default connect(mapStateToProps, {
-})(EditProfile);
+export default EditProfile;
 
 const styles = StyleSheet.create({
   container: {},

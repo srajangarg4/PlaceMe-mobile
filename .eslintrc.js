@@ -14,5 +14,6 @@ module.exports = {
     'linebreak-style': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-console': 'off',
+    'object-curly-newline': 'off',
   },
 };

@@ -62,7 +62,7 @@ const Screens = {
     path: 'pendingRequests',
   },
   jobApplication: {
-    path: 'Job Application',
+    path: 'Job Applications',
   },
   jobApplyForm: {
     path: 'jobApplyForm',

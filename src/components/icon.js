@@ -19,12 +19,12 @@ const Icon = ({
       containerStyle,
       rounded
         ? {
-          ...styles.rounded,
-          width: size,
-          height: size,
-          borderRadius: size / 2,
-          backgroundColor: color,
-        }
+            ...styles.rounded,
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor: color,
+          }
         : null,
     ]}
     onPress={onPress}
@@ -35,9 +35,9 @@ const Icon = ({
         styles.icon,
         size
           ? {
-            width: rounded ? size / 2 : size,
-            height: rounded ? size / 2 : size,
-          }
+              width: rounded ? size / 2 : size,
+              height: rounded ? size / 2 : size,
+            }
           : null,
         style,
       ]}

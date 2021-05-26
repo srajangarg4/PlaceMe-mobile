@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Container, Text } from '../../../../components';
 
 import {
   color,
-  locationType,
   messages,
-  navigationType,
 } from '../../../../utils';
 import SearchBar from './searchBar';
 
-const Home = ({ location, navigation }) => {
+const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    // for dynamically changing location on header when location changes
-    navigation.setOptions({});
-  }, [location, navigation]);
-
   return (
     <Container>
       <SearchBar
@@ -35,58 +26,18 @@ const Home = ({ location, navigation }) => {
         >
           {messages.home.listHeading}
         </Text>
-        <ScrollView
+        {/* <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.item}
         >
-          {/* {selectedSports?.map((item) => (
-            <SportsItem
-              key={item}
-              title={item}
-              icon={item}
-              size="small"
-              isSelected={selectedSport.includes(item)}
-              onPress={() => {
-                if (selectedSport.includes(item)) {
-                  setselectedSport(selectedSport.filter((e) => e !== item));
-                } else {
-                  setselectedSport([...selectedSport, item]);
-                }
-              }}
-            />
-          ))} */}
-          {/* <SportsItem
-            name="updatePreference"
-            icon="updatePreference"
-            title="Update Preferences"
-            onPress={() => {
-              NavigationService.navigate(screens.updateSports.path);
-            }}
-            isSelected={false}
-            size="small"
-          /> */}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </Container>
   );
 };
 
-Home.defaultProps = {
-  location: undefined,
-  navigation: undefined,
-};
-Home.propTypes = {
-  location: locationType,
-  navigation: navigationType,
-};
-
-const mapStateToProps = (state) => ({
-  location: state?.user?.location,
-  selectedSports: state?.user?.selectedSports,
-});
-export default connect(mapStateToProps, {
-})(Home);
+export default Home;
 
 const styles = StyleSheet.create({
   sportItem: {

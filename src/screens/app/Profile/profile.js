@@ -5,7 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar, Container, Text } from '../../../components';
 import {
-  color, navigationType, PropTypes, screens, viewStyleType,
+  color,
+  navigationType,
+  PropTypes,
+  screens,
+  viewStyleType,
 } from '../../../utils';
 import { removeAuth as logout } from '../../../actions';
 import NavigationService from '../../../NavigationService';
@@ -21,7 +25,9 @@ const Profile = ({ photoUri, navigation }) => {
           phoneNumber="+91 99999000"
           email="tobugo@gmail.com"
           imgSrc={{ uri: photoUri }}
-          onPress={() => NavigationService.navigate(screens.accountDetails.path)}
+          onPress={() =>
+            NavigationService.navigate(screens.accountDetails.path)
+          }
         />
         <Option
           name="Academic Details"
@@ -31,13 +37,26 @@ const Profile = ({ photoUri, navigation }) => {
         <Option
           name="Personal Details"
           icon="user-shield"
-          onPress={() => NavigationService.navigate(screens.personalDetails.path)}
+          onPress={() =>
+            NavigationService.navigate(screens.personalDetails.path)
+          }
         />
+        <Option
+          name="Update Requests"
+          icon="history"
+          onPress={() =>
+            NavigationService.navigate(screens.pendingRequests.path)
+          }
+        />
+
         <Option
           name="Change Password"
           icon="lock"
-          onPress={() => NavigationService.navigate(screens.changePassword.path)}
+          onPress={() =>
+            NavigationService.navigate(screens.changePassword.path)
+          }
         />
+
         <Option
           name="Logout"
           icon="sign-out-alt"
@@ -50,7 +69,8 @@ const Profile = ({ photoUri, navigation }) => {
   );
 };
 
-const uri = 'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
+const uri =
+  'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
 
 const ProfileDetails = ({
   containerStyle,
@@ -63,12 +83,23 @@ const ProfileDetails = ({
     <View style={[styles.profileContainer, containerStyle]}>
       <Avatar imgSrc={{ uri }} size={80} />
       <View style={{ marginLeft: 15, justifyContent: 'space-between' }}>
-        <Text fontSize={22} fontType="semiBold" color={color.primary}>{name}</Text>
-        <Text type="hs" color={color.primary}>{email}</Text>
-        <Text type="hs" color={color.primary}>{phoneNumber}</Text>
+        <Text fontSize={22} fontType="semiBold" color={color.primary}>
+          {name}
+        </Text>
+        <Text type="hs" color={color.primary}>
+          {email}
+        </Text>
+        <Text type="hs" color={color.primary}>
+          {phoneNumber}
+        </Text>
       </View>
       <View style={styles.avatarContainer}>
-        <Icon name="pencil-alt" size={15} color={color.secondary} onPress={onPress} />
+        <Icon
+          name="pencil-alt"
+          size={15}
+          color={color.secondary}
+          onPress={onPress}
+        />
       </View>
     </View>
   </View>
@@ -90,10 +121,16 @@ ProfileDetails.propTypes = {
 };
 
 const Option = ({ name, icon, onPress }) => (
-  <TouchableOpacity style={[styles.option]} onPress={onPress} activeOpacity={1.0}>
+  <TouchableOpacity
+    style={[styles.option]}
+    onPress={onPress}
+    activeOpacity={1.0}
+  >
     <View style={{ flexDirection: 'row' }}>
       <Icon name={icon} style={{ marginRight: 10 }} size={22} />
-      <Text fontType="semiBold" color={color.primary}>{name}</Text>
+      <Text fontType="semiBold" color={color.primary}>
+        {name}
+      </Text>
     </View>
     <View>
       <Icon name="chevron-right" style={styles.moreIcon} />

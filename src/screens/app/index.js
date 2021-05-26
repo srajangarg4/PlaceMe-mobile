@@ -1,17 +1,23 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {
-  color, fonts, PropTypes, screens,
-} from '../../utils';
+import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import ADIcon from 'react-native-vector-icons/AntDesign';
+import MIcon from 'react-native-vector-icons/MaterialIcons';
+import { color, fonts, screens } from '../../utils';
 import NavigationService from '../../NavigationService';
 import {
-  AcademicDetails, AccountDetails, ChangePassword, PersonalDetails, Profile, UpdateRequests,
+  AcademicDetails,
+  AccountDetails,
+  ChangePassword,
+  EditProfile,
+  PersonalDetails,
+  Profile,
+  UpdateRequests,
 } from './Profile';
-import { Dashboard } from './dashboard';
+import Home from './Home';
 import { JobConfirmation, JobDetails } from './Job';
-import JobApplications from './JobApplications/jobApplications';
+import { Applications } from './JobApplications';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -33,7 +39,7 @@ export const AppStack = () => (
         fontFamily: fonts.semiBold,
       },
       headerLeft: (props) => (
-        <Icon
+        <FAIcon
           name="arrow-left"
           size={20}
           style={{ marginHorizontal: 15 }}
@@ -58,17 +64,10 @@ export const AppStack = () => (
       name={screens.academicDetails.path}
       component={AcademicDetails}
     />
-    <Stack.Screen
-      name={screens.accountDetails.path}
-      component={AccountDetails}
-    />
+    <Stack.Screen name={screens.accountDetails.path} component={EditProfile} />
     <Stack.Screen
       name={screens.changePassword.path}
       component={ChangePassword}
-    />
-    <Stack.Screen
-      name={screens.profile.path}
-      component={Profile}
     />
     <Stack.Screen
       name={screens.pendingRequests.path}
@@ -78,24 +77,25 @@ export const AppStack = () => (
     <Stack.Screen
       name={screens.jobDetail.path}
       component={JobDetails}
+      options={{
+        headerShown: false,
+      }}
     />
     <Stack.Screen
       name={screens.jobApplyForm.path}
       component={JobConfirmation}
     />
     {/** ------------------------------------------------------------ */}
-    <Stack.Screen
-      name={screens.jobApplication.path}
-      component={JobApplications}
-    />
   </Stack.Navigator>
 );
 
-const CustomTabBarIcon = ({
-  focused, size, iconName,
-}) => (
-  <Icon size={size} name={iconName} color={focused ? color.secondary : color.primary} />
-);
+// const CustomTabBarIcon = ({ focused, size, iconName }) => (
+//   <Icon
+//     size={size}
+//     name={iconName}
+//     color={focused ? color.secondary : color.primary}
+//   />
+// );
 
 export const AppBottomNavigation = () => (
   <Tab.Navigator
@@ -114,35 +114,29 @@ export const AppBottomNavigation = () => (
     sceneContainerStyle={{ backgroundColor: color.background }}
   >
     <Tab.Screen
-      component={Dashboard}
+      component={Home}
       name={screens.home.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Home" {...props} iconName="home" />,
+        tabBarIcon: (props) => <ADIcon {...props} name="home" />,
       }}
     />
     <Tab.Screen
-      component={JobApplications}
+      component={Applications}
       name={screens.jobApplication.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Booking" {...props} iconName="graduation-cap" />,
+        tabBarIcon: (props) => (
+          <MIcon label="Booking" {...props} name="work-outline" />
+        ),
       }}
     />
     <Tab.Screen
       component={Profile}
       name={screens.profile.path}
       options={{
-        tabBarIcon: (props) => <CustomTabBarIcon label="Profile" {...props} iconName="user" />,
+        tabBarIcon: (props) => (
+          <FAIcon label="Profile" {...props} name="user" />
+        ),
       }}
     />
   </Tab.Navigator>
 );
-
-CustomTabBarIcon.defaultProps = {
-  focused: false,
-  size: undefined,
-};
-CustomTabBarIcon.propTypes = {
-  focused: PropTypes.bool,
-  size: PropTypes.number,
-  iconName: PropTypes.string.isRequired,
-};
