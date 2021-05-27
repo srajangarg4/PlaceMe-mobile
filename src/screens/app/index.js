@@ -6,9 +6,9 @@ import ADIcon from 'react-native-vector-icons/AntDesign';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import { color, fonts, screens } from '../../utils';
 import NavigationService from '../../NavigationService';
+import { UpdateRequestDetails } from './Profile/updateRequests';
 import {
   AcademicDetails,
-  AccountDetails,
   ChangePassword,
   EditProfile,
   PersonalDetails,
@@ -72,6 +72,10 @@ export const AppStack = () => (
     <Stack.Screen
       name={screens.pendingRequests.path}
       component={UpdateRequests}
+    />
+    <Stack.Screen
+      name={screens.updateRequestDetail.path}
+      component={UpdateRequestDetails}
     />
     {/** ------------------------------------------------------------ */}
     <Stack.Screen

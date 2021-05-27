@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { color, screens } from '../../utils';
 import Signin from './signin';
 import Signup from './signup';
-import Onboarding from './onboarding';
+import Onboarding from './onBoarding';
 import ForgotPassword from './forgotPassword';
 import otpSignup from './otpSignup';
 import OTP from './otp';
