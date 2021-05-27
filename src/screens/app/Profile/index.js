@@ -4,4 +4,4 @@ export { default as Profile } from './profile';
 export { default as AcademicDetails } from './academicDetail';
 export { default as PersonalDetails } from './personalDetail';
 export { default as AccountDetails } from './accountDetails';
-export { default as UpdateRequests } from './updateRequests';
+export * from './updateRequests';

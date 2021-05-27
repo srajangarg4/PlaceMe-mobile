@@ -67,6 +67,9 @@ const Screens = {
   jobApplyForm: {
     path: 'jobApplyForm',
   },
+  updateRequestDetail: {
+    path: 'updateRequestDeatil',
+  },
 };
 
 export default Screens;

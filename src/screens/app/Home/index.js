@@ -13,7 +13,7 @@ const HomeStack = () => (
       options={{
         headerStyle: {
           backgroundColor: color.background,
-          elevation: 5,
+          elevation: 14,
         },
         cardStyle: {
           backgroundColor: color.background,

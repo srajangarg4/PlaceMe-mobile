@@ -25,36 +25,28 @@ const Profile = ({ photoUri, navigation }) => {
           phoneNumber="+91 99999000"
           email="tobugo@gmail.com"
           imgSrc={{ uri: photoUri }}
-          onPress={() =>
-            NavigationService.navigate(screens.accountDetails.path)
-          }
+          onPress={() => NavigationService.navigate(screens.accountDetails.path)}
         />
         <Option
           name="Academic Details"
           icon="university"
-          onPress={() => navigation.navigate(screens.academicDetails.path)}
+          onPress={() => NavigationService.navigate(screens.academicDetails.path)}
         />
         <Option
           name="Personal Details"
           icon="user-shield"
-          onPress={() =>
-            NavigationService.navigate(screens.personalDetails.path)
-          }
+          onPress={() => NavigationService.navigate(screens.personalDetails.path)}
         />
         <Option
           name="Update Requests"
           icon="history"
-          onPress={() =>
-            NavigationService.navigate(screens.pendingRequests.path)
-          }
+          onPress={() => NavigationService.navigate(screens.pendingRequests.path)}
         />
 
         <Option
           name="Change Password"
           icon="lock"
-          onPress={() =>
-            NavigationService.navigate(screens.changePassword.path)
-          }
+          onPress={() => NavigationService.navigate(screens.changePassword.path)}
         />
 
         <Option
@@ -69,8 +61,7 @@ const Profile = ({ photoUri, navigation }) => {
   );
 };
 
-const uri =
-  'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
+const uri = 'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
 
 const ProfileDetails = ({
   containerStyle,
