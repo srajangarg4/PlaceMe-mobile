@@ -1,8 +1,8 @@
-export { default as facilities } from './faclilities';
-export { default as packages } from './packages';
-export { default as stateData } from './state';
-export { default as acemedyData } from './academyData';
-export { default as sports } from './sports';
-export { default as carouselImages } from './carouselImages';
 export { default as onboardingData } from './onboardingData';
-export { default as bookingData } from './bookingData';
+export { default as bloodGroups } from './bloodGroups';
+export { default as courses } from './courses';
+export { default as departments } from './departments';
+export { default as companyTypes } from './companyTypes';
+export { default as pendingRequests } from './pendingRequests';
+export { default as documentType } from './documentType';
+export { default as documents } from './documents';

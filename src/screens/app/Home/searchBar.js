@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import {
-  fonts, color, viewStyleType, PropTypes,
-} from '../../../../utils';
-import { Icon } from '../../../../components';
+import { fonts, color, viewStyleType, PropTypes } from '../../../utils';
+import { Icon } from '../../../components';
 
 const SearchBar = ({ style, onChange, value }) => (
   <View style={[styles.container, style]}>
-    <Icon name="search" size={20} />
+    <Icon name="search" size={15} color={color.textGray} />
     <TextInput
       placeholder="Search"
       style={styles.textInput}

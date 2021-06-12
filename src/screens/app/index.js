@@ -15,9 +15,10 @@ import {
   Profile,
   UpdateRequests,
 } from './Profile';
-import Home from './Home';
 import { JobConfirmation, JobDetails } from './Job';
-import { Applications } from './JobApplications';
+import { Applications, JobApplicationDetail } from './JobApplications';
+
+import { HomeNavigator } from './home';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -89,6 +90,11 @@ export const AppStack = () => (
       name={screens.jobApplyForm.path}
       component={JobConfirmation}
     />
+
+    <Stack.Screen
+      name={screens.jobApplicationDetail.path}
+      component={JobApplicationDetail}
+    />
     {/** ------------------------------------------------------------ */}
   </Stack.Navigator>
 );
@@ -118,7 +124,7 @@ export const AppBottomNavigation = () => (
     sceneContainerStyle={{ backgroundColor: color.background }}
   >
     <Tab.Screen
-      component={Home}
+      component={HomeNavigator}
       name={screens.home.path}
       options={{
         tabBarIcon: (props) => <ADIcon {...props} name="home" />,

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Container, Text } from '../../../components';
+import ApplicationStatusCard from './applicationStatusCard';
 
 const CompletedJobApplications = () => (
   <Container>
-    <Text>Completed Job Application</Text>
+    <ApplicationStatusCard />
+    <ApplicationStatusCard />
+    <ApplicationStatusCard />
+    <ApplicationStatusCard />
+
   </Container>
 );
 
