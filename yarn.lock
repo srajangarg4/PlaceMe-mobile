@@ -5825,6 +5825,12 @@
   dependencies:
     "find-up" "^4.0.0"
 
+"placeme-services@file:../PlaceMe-Services":
+  "resolved" "file:../PlaceMe-Services"
+  "version" "1.0.0"
+  dependencies:
+    "firebase" "^8.4.2"
+
 "plist@^3.0.1":
   "integrity" "sha512-MSrkwZBdQ6YapHy87/8hDU8MnIcyxBKjeF+McXnr5A9MtffPewTs7G3hlpodT5TacyfIyFTaJEhh3GGcmasTgQ=="
   "resolved" "https://registry.npmjs.org/plist/-/plist-3.0.2.tgz"

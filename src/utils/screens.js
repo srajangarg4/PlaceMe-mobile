@@ -64,6 +64,9 @@ const Screens = {
   jobApplication: {
     path: 'Job Applications',
   },
+  jobApplicationDetail: {
+    path: 'Job Applications Details',
+  },
   jobApplyForm: {
     path: 'jobApplyForm',
   },

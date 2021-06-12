@@ -54,37 +54,31 @@ const Text = ({
 }) => {
   if (onPress) {
     return (
-      <TouchableOpacity
-        onPress={onPress}
-        activeOpacity={0.8}
-        disabled={disabled}
+      <ReactText
+        textBreakStrategy="balanced"
+        {...props}
+        allowFontScaling={fontScaling}
+        maxFontSizeMultiplier={1.2}
+        style={[
+          {
+            color,
+            fontSize: getFontSize(fontSize, type),
+            flexWrap: 'wrap',
+            fontFamily: fontFamily || getFontFamily(fontType),
+            paddingVertical: 1,
+          },
+          centerAlign
+            ? {
+                textAlign: 'center',
+                alignSelf: 'center',
+              }
+            : {},
+          underline && { textDecorationLine: 'underline' },
+          style,
+        ]}
       >
-        <ReactText
-          textBreakStrategy="balanced"
-          {...props}
-          allowFontScaling={fontScaling}
-          maxFontSizeMultiplier={1.2}
-          style={[
-            {
-              color,
-              fontSize: getFontSize(fontSize, type),
-              flexWrap: 'wrap',
-              fontFamily: fontFamily || getFontFamily(fontType),
-              paddingVertical: 1,
-            },
-            centerAlign
-              ? {
-                  textAlign: 'center',
-                  alignSelf: 'center',
-                }
-              : {},
-            underline && { textDecorationLine: 'underline' },
-            style,
-          ]}
-        >
-          {children}
-        </ReactText>
-      </TouchableOpacity>
+        {children}
+      </ReactText>
     );
   }
   return (

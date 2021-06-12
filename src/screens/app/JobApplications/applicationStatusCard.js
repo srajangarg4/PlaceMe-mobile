@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Badge, Card, HorizontalLine, Text } from '../../../components';
-import { color, PropTypes } from '../../../utils';
+import NavigationService from '../../../NavigationService';
+import { color, PropTypes, screens } from '../../../utils';
 
 // const getTypeColor = (type) => {
 //   switch (type) {
@@ -44,8 +45,12 @@ DetailTab.propTypes = {
   alignment: PropTypes.string,
 };
 
-const ApplicationStatusCard = () => (
-  <Card style={styles.bookingCard}>
+const navigateToDetails = () =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  NavigationService.navigate(screens.jobApplicationDetail.path);
+
+const ApplicationStatusCard = ({ pending }) => (
+  <Card style={styles.bookingCard} onPress={navigateToDetails}>
     <View>
       <Text color={color.primary} fontType="semiBold" type="h4">
         Associate Staff Consultant
@@ -56,13 +61,25 @@ const ApplicationStatusCard = () => (
       <DetailTab name="Applied on" value="12/02/2021" />
       <DetailTab name="Rounds" value="3/5" alignment="right" />
     </View>
-    <HorizontalLine height={1} style={styles.line} />
-    <View style={styles.row}>
-      <Badge text="Key" color={color.green} />
-      <Icon name="chevron-right" size={15} />
-    </View>
+    {!pending && (
+      <View>
+        <HorizontalLine height={1} style={styles.line} />
+        <View style={styles.row}>
+          <Badge text="Selected" color={color.green} />
+          <Icon name="chevron-right" size={15} />
+        </View>
+      </View>
+    )}
   </Card>
 );
+
+ApplicationStatusCard.defaultProps = {
+  pending: false,
+};
+
+ApplicationStatusCard.propTypes = {
+  pending: PropTypes.bool,
+};
 
 export default ApplicationStatusCard;
 

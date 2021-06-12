@@ -12,7 +12,7 @@ export function hexToRGB(hex, alpha) {
   return result;
 }
 
-export const showToast = (message, duration) => {
+export const showToast = (message, duration = 'LONG') => {
   if (Platform.OS === 'ios') {
     Alert.alert(message);
   } else {

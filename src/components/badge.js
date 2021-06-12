@@ -8,13 +8,14 @@ import {
   viewStyleType,
 } from '../utils';
 
-const Badge = ({ text, style, textStyle, color, textColor }) => (
+const Badge = ({ text, style, textStyle, color, textColor, onPress }) => (
   <View style={[styles.container, { backgroundColor: color }, style]}>
     <Text
       color={textColor ?? Color.black}
       fontSize={12}
       style={textStyle}
       fontType="semiBold"
+      onPress={onPress}
     >
       {text}
     </Text>
@@ -26,6 +27,7 @@ Badge.defaultProps = {
   textStyle: undefined,
   color: Color.primary,
   textColor: Color.white,
+  onPress: undefined,
 };
 
 Badge.propTypes = {
@@ -34,6 +36,7 @@ Badge.propTypes = {
   textStyle: textStyleProps,
   color: PropTypes.string,
   textColor: PropTypes.string,
+  onPress: PropTypes.func,
 };
 
 export default Badge;

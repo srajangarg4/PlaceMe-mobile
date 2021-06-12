@@ -1,8 +1,9 @@
+/* eslint-disable indent */
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import MaterialIcon from 'react-native-vector-icons/FontAwesome5';
 import { imageStyleType, PropTypes, viewStyleType } from '../utils';
-import * as Icons from '../utils/icons';
 
 const Icon = ({
   name,
@@ -11,7 +12,7 @@ const Icon = ({
   size = 15,
   onPress,
   rounded,
-  color = 'white',
+  color,
 }) => (
   <TouchableOpacity
     activeOpacity={1.0}
@@ -29,8 +30,9 @@ const Icon = ({
     ]}
     onPress={onPress}
   >
-    <Image
-      source={Icons[name]}
+    <MaterialIcon
+      name={name}
+      color={color}
       style={[
         styles.icon,
         size
