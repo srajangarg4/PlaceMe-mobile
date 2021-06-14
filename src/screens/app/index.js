@@ -18,7 +18,7 @@ import {
 import { JobConfirmation, JobDetails } from './Job';
 import { Applications, JobApplicationDetail } from './JobApplications';
 
-import { HomeNavigator } from './home';
+import { HomeNavigator } from './Home';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

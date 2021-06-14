@@ -5,14 +5,14 @@ import { dispatch } from '../store';
 
 const service = new JobService();
 
-export async function getAllJobs() {
+export const getAllJobs = async () => {
   const { successful, error, result } = await service.getAll();
   if (successful) {
-    dispatch(addJobs(result));
+    console.log('Sucessful data', result);
   } else {
     showToast(error);
   }
-}
+};
 
 export async function getNextJobs(size) {
   await service.getNext(size);

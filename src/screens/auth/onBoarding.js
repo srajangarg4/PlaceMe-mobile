@@ -9,7 +9,7 @@ import {
   color, messages, PropTypes, screens, deviceWidth,
 } from '../../utils';
 import NavigationService from '../../NavigationService';
-import { updateAuth } from '../../actions';
+import { login } from '../../actions';
 import { onboardingData } from '../../assets/data';
 
 const Onboarding = () => {
@@ -103,7 +103,7 @@ const Onboarding = () => {
             textColor={color.primary}
             onPress={() => {
               dispatch(
-                updateAuth({
+                login({
                   alreadyVisited: true,
                 }),
               );

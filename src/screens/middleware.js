@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { Loader } from '../components';
 import { color } from '../utils';
 
-console.log('Hello');
 const Middleware = () => (
   <View
     style={{

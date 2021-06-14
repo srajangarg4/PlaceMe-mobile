@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Container, Filters } from '../../../components';
-import { getAllJobs } from '../../../middleware';
+import { getAllJobs } from '../../../middleware/job';
 import JobCard from './jobCard';
 import SearchBar from './searchBar';
 
@@ -15,6 +15,7 @@ const options = [
 
 const Dashboard = () => {
   const jobs = useSelector((state) => state.jobs);
+
   useEffect(() => {
     getAllJobs();
   }, []);

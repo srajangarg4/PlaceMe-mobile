@@ -17,7 +17,7 @@ import {
   validatePhoneNumber,
 } from '../../utils';
 import { useFormReducer } from '../../hooks';
-import { updateAuth as updateUserAction } from '../../actions';
+import { login as updateUserAction } from '../../actions';
 
 const validators = {
   phoneNumber: [

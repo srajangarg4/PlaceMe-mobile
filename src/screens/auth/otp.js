@@ -3,7 +3,7 @@ import {
   StyleSheet, Alert, Keyboard, View,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { updateAuth } from '../../actions';
+import { login } from '../../actions';
 import {
   OTPComponent,
   Button,
@@ -48,7 +48,7 @@ const OTP = () => {
       setShowLoading(true);
       setTimeout(() => {
         dispatch(
-          updateAuth({
+          login({
             token: '12345',
             isAuthCompleted: true,
           }),

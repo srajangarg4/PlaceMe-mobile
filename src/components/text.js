@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import React from 'react';
 import { Text as ReactText, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
@@ -54,31 +53,37 @@ const Text = ({
 }) => {
   if (onPress) {
     return (
-      <ReactText
-        textBreakStrategy="balanced"
-        {...props}
-        allowFontScaling={fontScaling}
-        maxFontSizeMultiplier={1.2}
-        style={[
-          {
-            color,
-            fontSize: getFontSize(fontSize, type),
-            flexWrap: 'wrap',
-            fontFamily: fontFamily || getFontFamily(fontType),
-            paddingVertical: 1,
-          },
-          centerAlign
-            ? {
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.8}
+        disabled={disabled}
+      >
+        <ReactText
+          textBreakStrategy="balanced"
+          {...props}
+          allowFontScaling={fontScaling}
+          maxFontSizeMultiplier={1.2}
+          style={[
+            {
+              color,
+              fontSize: getFontSize(fontSize, type),
+              flexWrap: 'wrap',
+              fontFamily: fontFamily || getFontFamily(fontType),
+              paddingVertical: 1,
+            },
+            centerAlign
+              ? {
                 textAlign: 'center',
                 alignSelf: 'center',
               }
-            : {},
-          underline && { textDecorationLine: 'underline' },
-          style,
-        ]}
-      >
-        {children}
-      </ReactText>
+              : {},
+            underline && { textDecorationLine: 'underline' },
+            style,
+          ]}
+        >
+          {children}
+        </ReactText>
+      </TouchableOpacity>
     );
   }
   return (
@@ -97,9 +102,9 @@ const Text = ({
         },
         centerAlign
           ? {
-              textAlign: 'center',
-              alignSelf: 'center',
-            }
+            textAlign: 'center',
+            alignSelf: 'center',
+          }
           : {},
         underline && { textDecorationLine: 'underline' },
         style,
