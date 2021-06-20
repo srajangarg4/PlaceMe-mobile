@@ -20,9 +20,10 @@ const BottomActionSheet = ({ show, onRequestClose, children }) => (
 
 BottomActionSheet.defaultProps = {
   children: null,
+  show: false,
 };
 BottomActionSheet.propTypes = {
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
   onRequestClose: PropTypes.func.isRequired,
   children: PropTypes.node,
 };

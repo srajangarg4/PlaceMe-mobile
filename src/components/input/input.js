@@ -100,7 +100,7 @@ const Input = ({
             secureTextEntry={secureTextEntry}
             maxLength={maxLength}
             showError={showError}
-            value={value}
+            value={`${value}`}
             disabled={disabled}
             autoFocus={autoFocus}
             blurOnSubmit={!!blurOnSubmit}
@@ -145,7 +145,8 @@ Input.propTypes = {
   secureTextEntry: PropTypes.bool,
   maxLength: PropTypes.number,
   showError: PropTypes.bool,
-  value: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  value: PropTypes.any,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
   blurOnSubmit: PropTypes.bool,
@@ -172,7 +173,7 @@ Input.defaultProps = {
   blurOnSubmit: undefined,
   onSubmitEditing: undefined,
   returnType: 'next',
-  inputRef: () => {},
+  inputRef: () => { },
   onFocus: undefined,
   onBlur: undefined,
   value: undefined,

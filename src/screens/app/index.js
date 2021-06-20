@@ -6,7 +6,7 @@ import ADIcon from 'react-native-vector-icons/AntDesign';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 import { color, fonts, screens } from '../../utils';
 import NavigationService from '../../NavigationService';
-import { UpdateRequestDetails } from './Profile/updateRequests';
+import { CompletedRequestDetails, UpdateRequestDetails } from './Profile/updateRequests';
 import {
   AcademicDetails,
   ChangePassword,
@@ -19,6 +19,7 @@ import { JobConfirmation, JobDetails } from './Job';
 import { Applications, JobApplicationDetail } from './JobApplications';
 
 import { HomeNavigator } from './Home';
+import Documents from './Profile/documents';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -38,6 +39,7 @@ export const AppStack = () => (
       headerTitleStyle: {
         color: color.primary,
         fontFamily: fonts.semiBold,
+        fontSize: 16,
       },
       headerLeft: (props) => (
         <FAIcon
@@ -77,6 +79,16 @@ export const AppStack = () => (
     <Stack.Screen
       name={screens.updateRequestDetail.path}
       component={UpdateRequestDetails}
+    />
+    <Stack.Screen
+      name={screens.completedRequestDetail.path}
+      component={CompletedRequestDetails}
+    />
+    <Stack.Screen
+      options={{
+        headerTitle: screens.documents.title }}
+      name={screens.documents.path}
+      component={Documents}
     />
     {/** ------------------------------------------------------------ */}
     <Stack.Screen

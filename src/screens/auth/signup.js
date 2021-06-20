@@ -2,19 +2,20 @@ import React, { useRef } from 'react';
 import {
   StyleSheet, View,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { updateAuth } from '../../actions';
 import {
   Button, Container, Heading, Input,
 } from '../../components';
 import { useFormReducer } from '../../hooks';
+import { signup } from '../../middleware/auth';
 import {
   confirmPasswordValidator,
-  messages, required, validateEmail, validateFirstName, validatePassword, validatePhoneNumber,
+  messages, required, Roles, validateEmail, validateFirstName,
+  validatePassword, validatePhoneNumber,
 } from '../../utils';
 
 const validators = {
-  name: [required(messages.required.name), validateFirstName],
+  firstName: [required(messages.required.firstName), validateFirstName],
+  lastName: [required(messages.required.lastName), validateFirstName],
   mobile: [required(messages.required.phoneNumber), validatePhoneNumber],
   email: [required(messages.required.email), validateEmail],
   password: [required(messages.required.password), validatePassword],
@@ -24,21 +25,27 @@ const validators = {
 const Signup = () => {
   const { connectField, handleSubmit, submitting } = useFormReducer(validators);
 
-  const nameRef = useRef(null);
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
   const emailRef = useRef(null);
   const phoneNumberRef = useRef(null);
   const passwordRef = useRef(null);
   const confPassRef = useRef(null);
 
-  const dispatch = useDispatch();
-
   return (
     <Container style={styles.container}>
       <Heading heading={messages.signup.heading} />
       <View style={styles.fieldContainer}>
-        {connectField('name', {
-          placeholder: 'Name',
-          inputRef: nameRef,
+        {connectField('firstName', {
+          placeholder: 'First name',
+          inputRef: firstNameRef,
+          onSubmitEditing: () => {
+            lastNameRef.current?.focus();
+          },
+        })(Input)}
+        {connectField('lastName', {
+          placeholder: 'Last name',
+          inputRef: lastNameRef,
           onSubmitEditing: () => {
             emailRef.current?.focus();
           },
@@ -76,8 +83,18 @@ const Signup = () => {
       <Button
         fullWidth
         text="Submit"
-        onPress={handleSubmit(() => {
-          dispatch(updateAuth({ token: '123' }));
+        onPress={handleSubmit(async (data) => {
+          const authData = {
+            name: {
+              firstName: data.firstName,
+              lastName: data.lastName,
+            },
+            email: data.email,
+            mobile: data.mobile,
+            role: Roles.STUDENT,
+          };
+          const { password } = data;
+          await signup(authData, password);
         })}
         loading={submitting}
       />

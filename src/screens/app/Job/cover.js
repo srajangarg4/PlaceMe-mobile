@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar } from '../../../components';
-import { color, viewStyleType } from '../../../utils';
+import { color, PropTypes, viewStyleType } from '../../../utils';
 
-const uri =
-  'https://pbs.twimg.com/profile_images/1370380607365246977/py2NQaCZ_400x400.png';
-
-const Cover = ({ style }) => (
+const Cover = ({ style, logo }) => (
   <View style={[styles.container, style]}>
     <View style={styles.innerContainer}>
       <Avatar
-        imgSrc={{ uri }}
+        imgSrc={{ uri: logo }}
         containerStyle={styles.logo}
         size={120}
         imageStyle={styles.imgae}
@@ -21,10 +18,12 @@ const Cover = ({ style }) => (
 
 Cover.defaultProps = {
   style: null,
+  logo: '',
 };
 
 Cover.propTypes = {
   style: viewStyleType,
+  logo: PropTypes.string,
 };
 
 export default Cover;

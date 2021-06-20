@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { TopTab } from '../../../../components';
 import { color } from '../../../../utils';
-import CompletedUpdateRequests from './completedUpdateRequests';
-import PendingUpdateRequests from './pendingUpdateRequests';
+import CompletedUpdateRequests from './completedRequest/completedUpdateRequests';
+import PendingUpdateRequests from './pendingRequest/pendingUpdateRequests';
 
 const tabs = [
   {

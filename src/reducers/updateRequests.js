@@ -1,14 +1,23 @@
 import { ADD_REQUESTS } from '../actions/pendingRequests';
 
-const initailState = {
-  requests: [],
+const defaultState = {
+  requests: {},
 };
 
-const updateRequestReducer = (state = initailState, action) => {
+const updateRequestReducer = (state = defaultState, action) => {
   const { type, payload } = action;
   switch (type) {
     case ADD_REQUESTS: {
-      return { ...state, requests: [...payload] };
+      const temp = {};
+      payload?.forEach((item) => {
+        const { id } = item;
+        temp[id] = item;
+      });
+      return {
+        ...state,
+        requests: {
+          ...state.requests, ...temp,
+        } };
     }
     default:
       return state;

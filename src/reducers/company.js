@@ -20,6 +20,7 @@ const comapnyReducer = (
     case ADD_COMPANIES:
     {
       let newState;
+
       payload?.forEach(({ data, id }) => {
         newState = {
           ...state,

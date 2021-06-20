@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Text from './text';
-import Icon from './icon';
 import { color, PropTypes, textStyleProps } from '../utils';
 
 const Property = ({
@@ -13,39 +12,30 @@ const Property = ({
   valueStyle,
   valueBackgroundColor,
   textColor,
-  showCurrency,
-  currencySize,
-  negative,
-  greenCurrency,
   onPressKey,
   onPressValue,
 }) => (
   <View style={styles.container}>
     <Text
-      style={[keyStyle]}
+      style={[styles.keyStyle, keyStyle]}
       color={textColor || keyColor}
       fontType="regular"
       fontSize={14}
       onPress={onPressKey}
+      numberOfLines={1}
+      ellipsizeMode="tail"
     >
       {keyName}
     </Text>
-    <View style={styles.row}>
-      {negative ? (
-        <Text color={textColor || valueColor || color.black}>-</Text>
-      ) : null}
-      {showCurrency ? (
-        <Icon
-          name={greenCurrency ? 'greenRupee' : 'rupee'}
-          size={currencySize}
-        />
-      ) : null}
+    <View style={styles.valueStyle}>
       <Text
         style={[{ backgroundColor: valueBackgroundColor }, valueStyle]}
         color={textColor || valueColor || color.black}
         fontSize={14}
         fontType="semiBold"
         onPress={onPressValue}
+        numberOfLines={1}
+        ellipsizeMode="tail"
       >
         {value}
       </Text>
@@ -57,10 +47,6 @@ Property.defaultProps = {
   keyStyle: undefined,
   valueStyle: undefined,
   textColor: undefined,
-  showCurrency: false,
-  currencySize: 12,
-  negative: false,
-  greenCurrency: false,
   keyColor: color.primary,
   valueColor: color.textGray,
   valueBackgroundColor: color.white,
@@ -73,10 +59,6 @@ Property.propTypes = {
   keyStyle: textStyleProps,
   valueStyle: textStyleProps,
   textColor: PropTypes.string,
-  showCurrency: PropTypes.bool,
-  currencySize: PropTypes.number,
-  negative: PropTypes.bool,
-  greenCurrency: PropTypes.bool,
   keyColor: PropTypes.string,
   valueColor: PropTypes.string,
   valueBackgroundColor: PropTypes.string,
@@ -96,5 +78,13 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  keyStyle: {
+    flex: 1,
+
+  },
+  valueStyle: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
 });

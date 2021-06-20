@@ -1,5 +1,7 @@
+import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Alert, ScrollView, StyleSheet, ToastAndroid, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import {
   Accordion,
   Badge,
@@ -9,17 +11,47 @@ import {
   Property,
   Text,
 } from '../../../components';
-import { color } from '../../../utils';
+import { color, resolveDate, resolveSalary } from '../../../utils';
 import Cover from './cover';
 
-const description = 'Lorem ipsum dolor sit amet, r. Phasellus dapibus laoreet massa ut tincidunt. Pellentesque bibendum, leo quis pulvinar cursus, justo ligula venenatis odio, eget luctus elit dolor id nunc. Duis ut tellus egestas, luctus libero sit amet, aliquam turpis. Duis ac odio eget urna imperdiet laoreet vel vel quam. Nam et nunc commodo, elementum justo vel, rutrum nibh. Sed et odio sit amet erat dignissim suscipit. Praesent vitae diam volutpat dui pharetra varius non sit amet magna. Fusce nisl magna, ultrices vel iaculis sit amet, ornare laoreet risus.';
+const Bond = ({ doesExist, period, amount }) => (
+  <Accordion title="Bond">
+    {doesExist
+      ? (
+
+        <Property keyName="Amount" value={amount} />
+
+      )
+      : (
+        <Text>
+          No Bond
+        </Text>
+      )}
+
+  </Accordion>
+);
 
 const JobDetails = () => {
+  const { params: { id } } = useRoute();
+  const job = useSelector((state) => state.job);
+  const company = useSelector((state) => state.company);
+
+  const jobDetail = job.jobs[id];
+  const { company: companyId } = { ...jobDetail };
+  const companyDetail = company.companies[companyId];
+
+  const { logo: { uri } = {}, name: companyName } = { ...companyDetail };
+  const {
+    lastDateToApply, salary, title: jobTitle, description, maxBacklogs,
+    forBatchs, forDepartments, bond, jobType, location, maxAcademicGap
+  } = { ...jobDetail };
+  console.log('Job details', bond);
+
   const [loading, setloading] = useState(false);
   return (
     <View style={styles.root}>
       <Container style={{ paddingHorizontal: 0 }}>
-        <Cover style={styles.cover} />
+        <Cover style={styles.cover} logo={uri} />
         <View style={styles.group}>
           <Text
             type="h3"
@@ -27,9 +59,9 @@ const JobDetails = () => {
             color={color.primary}
             style={styles.heading}
           >
-            Software Developer intern
+            {jobTitle}
           </Text>
-          <Text type="hs">Nagarro Digital Pvt. Ltd</Text>
+          <Text type="hs">{companyName}</Text>
         </View>
         <View style={styles.group}>
           <HorizontalLine height={1.5} />
@@ -44,11 +76,11 @@ const JobDetails = () => {
           <HorizontalLine height={1.5} />
         </View>
         <View style={styles.group}>
-          <Property keyName="Salary" value="6 LPA" />
-          <Property keyName="For batches" value="2021" />
-          <Property keyName="For department" value="CSE, ECE" />
-          <Property keyName="Allowed backlogs" value="2" />
-          <Property keyName="Apply till" value="12/02/2000" />
+          <Property keyName="Salary" value={resolveSalary(salary)} />
+          <Property keyName="For batches" value={forBatchs?.join(', ')} />
+          <Property keyName="For department" value={forDepartments?.join(', ')} />
+          <Property keyName="Allowed backlogs" value={`${maxBacklogs}`} />
+          <Property keyName="Apply till" value={resolveDate(lastDateToApply).toDateString()} />
         </View>
         <View style={styles.group}>
           <Accordion title="Description">
@@ -58,11 +90,7 @@ const JobDetails = () => {
           </Accordion>
         </View>
         <View style={styles.group}>
-          <Accordion title="Bond">
-            <Text type="hs" color={color.black} numberOfLines={4}>
-              {description}
-            </Text>
-          </Accordion>
+          <Bond {...bond} />
         </View>
         <View style={styles.group}>
           <Accordion title="Rounds">
@@ -98,6 +126,7 @@ const JobDetails = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,

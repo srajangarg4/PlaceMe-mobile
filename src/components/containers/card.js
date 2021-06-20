@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
     elevation: 3,
     backgroundColor: color.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    borderColor: color.lightBule,
   },
 });
 

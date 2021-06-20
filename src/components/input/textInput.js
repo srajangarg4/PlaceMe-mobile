@@ -18,7 +18,7 @@ const TextInput = ({
   style,
   borderColor,
   keyboardType,
-  secureTextEntry = false,
+  secureTextEntry,
   maxLength,
   showError,
   value,
@@ -39,7 +39,6 @@ const TextInput = ({
       style={[
         styles.inputTextField,
         style,
-        disabled ? { backgroundColor: color.ultraLightGray } : {},
         borderColor ? { borderBottomColor: borderColor } : null,
         showError ? { borderBottomColor: color.error } : null,
       ]}
@@ -50,7 +49,6 @@ const TextInput = ({
         onChange={onChange}
         style={[
           styles.input,
-          disabled ? { backgroundColor: color.ultraLightGray } : {},
           !rightImageSrc ? { marginHorizontal: 0 } : {},
         ]}
         keyboardType={keyboardType}
@@ -124,7 +122,8 @@ TextInput.propTypes = {
   secureTextEntry: PropTypes.bool,
   maxLength: PropTypes.number,
   showError: PropTypes.bool,
-  value: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  value: PropTypes.any,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
   blurOnSubmit: PropTypes.bool,

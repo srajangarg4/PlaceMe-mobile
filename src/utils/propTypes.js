@@ -65,3 +65,5 @@ export const userDataType = shape({
   phoneNumber: string,
   selectedSports: arrayOf(string),
 });
+
+export const inputType = oneOfType([number, string]);

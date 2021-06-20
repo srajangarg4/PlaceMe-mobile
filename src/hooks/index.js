@@ -1,3 +1,2 @@
-/* eslint-disable import/named */
-// eslint-disable-next-line import/prefer-default-export
 export * from './useFormReducer';
+export { default as useDatabase } from './useDatabase';

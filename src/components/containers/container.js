@@ -26,7 +26,8 @@ const Container = ({
     return (
       <View style={styles.loadingView}>
         <Loader show />
-        <Text style={styles.loadingText} color={color.primary}>{loadingLabel}</Text>
+        {loadingLabel
+          && <Text style={styles.loadingText} color={color.primary}>{loadingLabel}</Text>}
       </View>
     );
   }
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 50,
   },
   loadingText: {
     marginTop: 15,

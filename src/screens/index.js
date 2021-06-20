@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 import { screens } from '../utils';
 import NavigationService from '../NavigationService';
 import AuthStack from './auth';
+import { AUTH_STATE, getData } from '../AsyncStorage';
 import Middleware from './middleware';
 import { AppStack } from './app';
 
@@ -11,17 +13,28 @@ const Stack = createStackNavigator();
 
 const modules = { middleware: 'middleware', auth: 'auth', app: 'app' };
 
-// UserService.loginUser('17egjcs161@gitjaipur.com', 'Papa@1234').then((res) => {
-//   console.log('Login Result', res.result.otherDetails);
-// });
-
 const AppNavigator = () => {
   const [module, setModule] = useState(modules.middleware);
+  const auth = useSelector((state) => state.user);
+
+  const checkLogin = useCallback(
+    async () => {
+      let data = { ...auth };
+      if (!auth?.token) {
+        data = await getData(AUTH_STATE);
+      }
+      if (data?.token) {
+        setModule(modules.app);
+      } else {
+        setModule(modules.auth);
+      }
+    },
+    [auth],
+  );
 
   useEffect(() => {
-    // console.log('User', user);
-    setModule(modules.app);
-  }, []);
+    checkLogin();
+  }, [checkLogin]);
 
   return (
     <NavigationContainer

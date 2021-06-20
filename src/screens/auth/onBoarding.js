@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Image, StyleSheet, TouchableOpacity, View,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Text } from '../../components';
 import {
   color, messages, PropTypes, screens, deviceWidth,
 } from '../../utils';
 import NavigationService from '../../NavigationService';
-import { login } from '../../actions';
 import { onboardingData } from '../../assets/data';
 
 const Onboarding = () => {
@@ -18,7 +16,6 @@ const Onboarding = () => {
     timer: undefined,
     currentOffset: deviceWidth,
   });
-  const dispatch = useDispatch();
   const ref = useRef();
   useEffect(() => {
     const timerID = setInterval(() => {
@@ -102,11 +99,11 @@ const Onboarding = () => {
             textType="h4"
             textColor={color.primary}
             onPress={() => {
-              dispatch(
-                login({
-                  alreadyVisited: true,
-                }),
-              );
+              // dispatch(
+              //   login({
+              //     alreadyVisited: true,
+              //   }),
+              // );
               NavigationService.navigate(screens.signup.path);
             }}
             style={{ borderWidth: 0 }}

@@ -26,6 +26,7 @@ export const TopTab = ({
   activeTextColor,
   inactiveTextColor,
   scrollerColor,
+  ...extraProps
 }) => {
   const [tabWidth, setTabWidth] = useState(deviceWidth);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -76,7 +77,7 @@ export const TopTab = ({
         pagingEnabled
         data={tabs}
         keyExtractor={(item) => item.name}
-        renderItem={(item) => <TabScreen {...item.item} style={screenStyle} />}
+        renderItem={(item) => <TabScreen {...item.item} style={screenStyle} {...extraProps} />}
         showsHorizontalScrollIndicator={false}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
@@ -165,8 +166,8 @@ Tab.propTypes = {
   style: textStyleProps,
 };
 
-const TabScreen = ({ screen, style }) => (
-  <View style={[styles.tabView, style]}>{screen()}</View>
+const TabScreen = ({ screen: Screen, style }) => (
+  <View style={[styles.tabView, style]}><Screen /></View>
 );
 
 TabScreen.defaultProps = {

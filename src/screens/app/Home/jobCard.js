@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import {
   Avatar,
   Badge,
@@ -10,49 +12,58 @@ import {
   Text,
 } from '../../../components';
 import NavigationService from '../../../NavigationService';
-import { color, screens } from '../../../utils';
+import { color, PropTypes, resolveDate, resolveSalary, screens } from '../../../utils';
 
-const uri =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvBfYOFZeVd-vB6uCNlmjna1zcgd0_JYrij9NP1To1ZWpyBxhmpVjAnJ2mdYiJ7J13Gso&usqp=CAU';
+const JobCard = ({ id }) => {
+  const job = useSelector((state) => state.job);
+  const company = useSelector((state) => state.company);
+  const { navigate } = useNavigation();
 
-const JobCard = () => (
-  <Card
-    style={styles.card}
-    onPress={() => NavigationService.navigate(screens.jobDetail.path)}
-  >
-    <Container style={styles.container}>
-      <View style={[styles.row]}>
-        <Avatar imgSrc={{ uri }} size={80} />
-        <View style={styles.textContainer}>
-          <Text color={color.primary} type="h4" fontType="semiBold">
-            Software developer intern
-          </Text>
-          <Text type="hs">Nagarro digital Pvt. Ltd</Text>
+  const jobDetail = job.jobs[id];
+  const { company: companyId, title } = { ...jobDetail };
+  const companyDetail = company.companies[companyId];
+
+  const { logo: { uri } = {}, name: companyName } = { ...companyDetail };
+  const { lastDateToApply, salary } = { ...jobDetail };
+
+  return (
+    <Card
+      style={styles.card}
+      onPress={() => navigate(screens.jobDetail.path, { id })}
+    >
+      <Container style={styles.container}>
+        <View style={[styles.row]}>
+          <Avatar size={80} imgSrc={{ uri }} />
+          <View style={styles.textContainer}>
+            <Text color={color.primary} type="h4" fontType="semiBold">
+              {title}
+            </Text>
+            <Text type="hs">{companyName}</Text>
+          </View>
         </View>
-      </View>
-      <HorizontalLine style={styles.line} />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Badge text="Java" style={styles.badge} />
-        <Badge text="C++" style={styles.badge} />
-        <Badge text="DotNet" style={styles.badge} />
-        <Badge text="JavaScript" style={styles.badge} />
-      </ScrollView>
-      <HorizontalLine style={styles.line} />
-      <View />
-      <Property keyName="Package" value="6 LPA" />
-      <Property keyName="Apply till" value="12/02/2021" />
-    </Container>
-  </Card>
-);
+        <HorizontalLine style={styles.line} />
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <Badge text="Java" style={styles.badge} />
+          <Badge text="C++" style={styles.badge} />
+          <Badge text="DotNet" style={styles.badge} />
+          <Badge text="JavaScript" style={styles.badge} />
+        </ScrollView>
+        <HorizontalLine style={styles.line} />
+        <View />
+        <Property keyName="Package" value={resolveSalary(salary)} />
+        <Property keyName="Apply till" value={resolveDate(lastDateToApply).toDateString()} />
+      </Container>
+    </Card>
+  );
+};
 
 JobCard.defaultProps = {};
-JobCard.propTypes = {};
+JobCard.propTypes = { id: PropTypes.string.isRequired };
 
 export default JobCard;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 0.75,
     paddingVertical: 15,
     borderRadius: 8,
     borderColor: color.ultraLightGray,

@@ -2,17 +2,16 @@ import React, { useRef } from 'react';
 import {
   StyleSheet, View,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { updateAuth } from '../../actions';
 import {
   Button, Container, Heading, Input, Text,
 } from '../../components';
-import { useFormReducer } from '../../hooks';
 import NavigationService from '../../NavigationService';
 import {
   color,
-  messages, required, screens, validateEmail, validatePassword,
+  messages, required, screens, showToast, validateEmail, validatePassword,
 } from '../../utils';
+import { useFormReducer } from '../../hooks';
+import { login } from '../../middleware/auth';
 
 const validators = {
   email: [required(messages.required.email), validateEmail],
@@ -22,7 +21,6 @@ const validators = {
 const navigateToSignup = () => NavigationService.navigate(screens.signup.path);
 
 const Signin = () => {
-  const dispatch = useDispatch();
   const { connectField, handleSubmit, submitting } = useFormReducer(validators);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -34,10 +32,12 @@ const Signin = () => {
         {connectField('email', {
           placeholder: 'Email address',
           keyboardType: 'email-address',
+          autoCompleteType: 'email',
           inputRef: emailRef,
           onSubmitEditing: () => {
             passwordRef.current?.focus();
           },
+          textContentType: 'emailAddress',
         })(Input)}
         {connectField('password', {
           placeholder: 'Password',
@@ -67,8 +67,8 @@ const Signin = () => {
       <Button
         fullWidth
         text="Submit"
-        onPress={handleSubmit(() => {
-          dispatch(updateAuth({ token: '123' }));
+        onPress={handleSubmit(async (data) => {
+          await login(data, undefined, (error) => showToast(error));
         })}
         loading={submitting}
         style={styles.button}

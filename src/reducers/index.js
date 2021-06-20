@@ -4,17 +4,25 @@ import job from './job';
 import company from './company';
 import personalDetail from './personalDetail';
 import academicDetail from './academicDetail';
-import documents from './documents';
 import updateRequests from './updateRequests';
+import { RESET_STORE } from '../actions';
+import completedRequests from './completedUpdateRequests';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   user,
   job,
   company,
   personalDetail,
   academicDetail,
-  documents,
   updateRequests,
+  completedRequests,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === RESET_STORE) {
+    return appReducer({}, action);
+  }
+  return appReducer(state, action);
+};
 
 export default rootReducer;

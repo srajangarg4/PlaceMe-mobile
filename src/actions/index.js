@@ -5,3 +5,5 @@ export * from './companies';
 export * from './academicDetails';
 export * from './personalDetails';
 export * from './common';
+export * from './completedRequests';
+export * from './pendingRequests';

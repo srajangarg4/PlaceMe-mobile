@@ -1,20 +1,23 @@
 import { JobService } from 'placeme-services/lib';
-import { showToast } from '../utils';
 import { addJobs } from '../actions';
 import { dispatch } from '../store';
+import { fetchAllCompany } from './company';
 
 const service = new JobService();
 
-export const getAllJobs = async () => {
-  const { successful, error, result } = await service.getAll();
-  if (successful) {
-    console.log('Sucessful data', result);
-  } else {
-    showToast(error);
-  }
-};
+export const fetchAllJobs = () => service.getAll();
 
-export async function getNextJobs(size) {
+export async function fetchNextJobs(size) {
   await service.getNext(size);
   dispatch(addJobs());
 }
+
+export const fetchCompaniesAndJobs = async () => {
+  const jobResult = await service.getAll();
+  const companyResult = await fetchAllCompany();
+  return {
+    successful: jobResult.successful && companyResult.successful,
+    result: { jobs: jobResult.result, companies: companyResult.result },
+    error: jobResult.error ?? companyResult.error,
+  };
+};

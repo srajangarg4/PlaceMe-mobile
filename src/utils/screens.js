@@ -73,6 +73,13 @@ const Screens = {
   updateRequestDetail: {
     path: 'updateRequestDeatil',
   },
+  completedRequestDetail: {
+    path: 'completedRequestDeatil',
+  },
+  documents: {
+    path: 'documents',
+    title: 'My Documents',
+  },
 };
 
 export default Screens;

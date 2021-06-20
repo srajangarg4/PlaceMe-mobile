@@ -5,7 +5,7 @@ const userReducer = (state = {}, action) => {
   const { payload, type } = action;
   switch (type) {
     case LOGIN: {
-      const newState = { ...state, ...payload };
+      const newState = { ...state, ...payload, token: '1234' };
       saveData(AUTH_STATE, newState);
       return !payload ? state : newState;
     }

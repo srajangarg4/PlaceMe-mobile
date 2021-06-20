@@ -17,3 +17,4 @@ export { default as Property } from './property';
 export { default as Accordion } from './accordion';
 export { default as TopTab } from './topTab';
 export { default as Filters } from './filters';
+export { default as Error } from './error';

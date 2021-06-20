@@ -1,31 +1,36 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 import { Avatar, Container, Text } from '../../../components';
 import {
   color,
-  navigationType,
   PropTypes,
   screens,
   viewStyleType,
 } from '../../../utils';
-import { removeAuth as logout } from '../../../actions';
 import NavigationService from '../../../NavigationService';
+import { logout } from '../../../middleware/auth';
 
-const Profile = ({ photoUri, navigation }) => {
-  console.log(navigation);
-  const dispatch = useDispatch();
+const Profile = ({ photoUri }) => {
+  const user = useSelector((state) => state.user);
+  const { email, mobile, name } = { ...user };
+  const { firstName, lastName } = { ...name };
   return (
     <Container style={styles.container}>
       <View>
         <ProfileDetails
-          name="Tobugo"
-          phoneNumber="+91 99999000"
-          email="tobugo@gmail.com"
+          name={`${firstName} ${lastName}`}
+          phoneNumber={mobile}
+          email={email}
           imgSrc={{ uri: photoUri }}
           onPress={() => NavigationService.navigate(screens.accountDetails.path)}
+        />
+        <Option
+          name="Personal Details"
+          icon="user-shield"
+          onPress={() => NavigationService.navigate(screens.personalDetails.path)}
         />
         <Option
           name="Academic Details"
@@ -33,9 +38,9 @@ const Profile = ({ photoUri, navigation }) => {
           onPress={() => NavigationService.navigate(screens.academicDetails.path)}
         />
         <Option
-          name="Personal Details"
-          icon="user-shield"
-          onPress={() => NavigationService.navigate(screens.personalDetails.path)}
+          name="Documents"
+          icon="folder-open"
+          onPress={() => NavigationService.navigate(screens.documents.path)}
         />
         <Option
           name="Update Requests"
@@ -53,7 +58,7 @@ const Profile = ({ photoUri, navigation }) => {
           name="Logout"
           icon="sign-out-alt"
           onPress={() => {
-            dispatch(logout());
+            logout();
           }}
         />
       </View>
@@ -117,8 +122,8 @@ const Option = ({ name, icon, onPress }) => (
     onPress={onPress}
     activeOpacity={1.0}
   >
-    <View style={{ flexDirection: 'row' }}>
-      <Icon name={icon} style={{ marginRight: 10 }} size={22} />
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Icon color={color.secondary} name={icon} style={{ marginRight: 10 }} size={18} solid />
       <Text fontType="semiBold" color={color.primary}>
         {name}
       </Text>
@@ -146,7 +151,6 @@ Profile.defaultProps = {
 
 Profile.propTypes = {
   photoUri: PropTypes.string,
-  navigation: navigationType.isRequired,
 };
 
 export default Profile;

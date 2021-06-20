@@ -22,8 +22,9 @@ export const validatePostCode = (postcode) => {
 };
 
 export const validatePhoneNumber = (phoneNumber) => {
+  const mobile = `${phoneNumber}`;
   const regex = /^\d{10}$/;
-  if (phoneNumber && phoneNumber.match(regex)) {
+  if (mobile && mobile.match(regex)) {
     return '';
   }
   return messages.validation.enterValidPhoneNumber;

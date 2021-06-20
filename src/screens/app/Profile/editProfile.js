@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { useSelector } from 'react-redux';
 import { Avatar, Button, Container, Input } from '../../../components';
 import {
   containerWidth,
@@ -16,19 +17,26 @@ import NavigationService from '../../../NavigationService';
 const validators = {
   name: [required(messages.validation.name)],
   email: [required(messages.validation.enterEmail), validateEmail],
-  phone: [required(messages.validation.enterPhoneNumber), validatePhoneNumber],
+  mobile: [required(messages.validation.enterPhoneNumber), validatePhoneNumber],
 };
 
-const uri =
-  'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
+const uri = 'https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg';
 
 const EditProfile = () => {
-  const { connectField, submitting, handleSubmit } = useFormReducer(validators);
+  const user = useSelector((state) => state.user);
+  const { name, email, mobile } = { ...user };
+
+  const { connectField, submitting, handleSubmit } = useFormReducer(validators, {
+    name: `${name?.firstName} ${name?.lastName}`,
+    email,
+    mobile,
+  });
+
   const nameRef = useRef(null);
   const dobRef = useRef(null);
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
-  useEffect(() => {}, []);
+
   return (
     <Container keyboardAware>
       <Avatar
@@ -58,6 +66,7 @@ const EditProfile = () => {
             dobRef.current?.onPressDate();
           },
           style: styles.input,
+          disabled: true,
         })(Input)}
         {connectField('email', {
           placeholder: 'Email address',
@@ -67,8 +76,9 @@ const EditProfile = () => {
           },
           keyboardType: 'email-address',
           style: styles.input,
+          disabled: true,
         })(Input)}
-        {connectField('phone', {
+        {connectField('mobile', {
           placeholder: 'Phone number',
           inputRef: phoneRef,
           blurOnSubmit: true,

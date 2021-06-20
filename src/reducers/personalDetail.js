@@ -5,8 +5,8 @@ const personalDetailReducer = (state = null, action) => {
   switch (type) {
     case ADD_PERSONAL_DETAIL:
     {
-      const { id, data } = payload;
-      return { [id]: data };
+      const { data } = payload;
+      return { ...state, ...data };
     }
     default:
       return state;
